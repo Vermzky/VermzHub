@@ -1,0 +1,45 @@
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Vermz Hub Key System", "DarkTheme")
+
+local Main = Window:NewTab("Check Key")
+local Section = Main:NewSection("Key System")
+
+_G.Key = "nothing_yet"
+
+Section:NewButton("Copy Key Link", "Paste link in browser", function()
+    setclipboard("https://work.ink/1Wzn/m1rf6c1c")
+end)
+
+local KeyLabel = Section:NewLabel("Key 1 | ".. _G.Key)
+local KeyInput = Section:NewTextBox("Key", "Key",
+    function(txt)
+        KeyLabel:UpdateLabel("Key > ".. txt)
+        _G.Key = txt
+        CheckKey()
+    end)
+
+_G.CheckKey = false
+local OutputLabel = Section:NewLabel("")
+    function CheckKey()
+    if _G.CheckedKey == true then
+        return
+    end 
+    local key = game:HttpGet("https://redirect-api.work.ink/tokenValid/".. _G.Key .. "?linkId=64581")
+    if key == 'False' then
+        OutputLabel:UpdateLabel("Key Incorrect")
+        return
+    end
+
+    _G.CheckedKey = true
+    if game.PlaceId == 18121149395 then
+        local script = loadstring(game:HttpGet("https://raw.githubusercontent.com/Vermzky/VermzHub/refs/heads/main/Vermz%20Hub"))()
+        if script then
+            script()
+        else
+            OutputLabel:UpdateLabel("Key Incorrect")
+        end
+    else
+    OutputLabel:UpdateLabel("Unsupported Game")        
+   end
+end
+
