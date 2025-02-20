@@ -627,6 +627,16 @@ function CreateUniversalTabs()
 	end
 end
 
+			function DropdownSettings:Refresh(optionsTable: table) -- updates a dropdown with new options from optionsTable
+				DropdownSettings.Options = optionsTable
+				for _, option in Dropdown.List:GetChildren() do
+					if option.ClassName == "Frame" and option.Name ~= "Placeholder" then
+						option:Destroy()
+					end
+				end
+				SetDropdownOptions()
+			end
+
 getgenv().CreateUniversalTabs = CreateUniversalTabs
 
 if not ScriptVersion or ScriptVersion == "Universal" then
